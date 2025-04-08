@@ -36,6 +36,18 @@ open class GridProperties {
         properties = dict!
     }
     
+    public init(_ propertiesData: Data) {
+//        let dict: [String: Any]?
+//        properties = [:]
+//        let propertiesPath = GridProperties.propertyListURL(resourceClass, bundle, name)
+        do {
+//            let propertiesData = try Data(contentsOf: propertiesPath)
+            properties = try PropertyListSerialization.propertyList(from: propertiesData, options: [], format: nil) as? [String: Any] ?? [:]
+        } catch {
+            fatalError("Failed to load properties data")
+        }
+    }
+    
     /**
      *  Combine the base property with the property to create a single combined property
      *
@@ -317,10 +329,17 @@ open class GridProperties {
     public static func propertyListURL(_ resourceClass: AnyClass, _ bundle: String, _ name: String) -> URL {
         return resourceURL(resourceClass, bundle, name, PropertyConstants.PROPERTY_LIST_TYPE)
     }
+    
+//    public static func propertyListURL(_ name: String) -> URL {
+//        return resourceURL(resourceClass, bundle, name, PropertyConstants.PROPERTY_LIST_TYPE)
+//    }
+
 
     public static func resourceURL(_ resourceClass: AnyClass, _ bundle: String, _ name: String, _ ext: String) -> URL {
         
         let resource = "\(bundle)/\(name)"
+        
+        
         var resourceURL = Bundle.main.url(forResource: resource, withExtension: ext)
         if resourceURL == nil {
             resourceURL = Bundle(for: resourceClass).url(forResource: resource, withExtension: ext)

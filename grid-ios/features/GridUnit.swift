@@ -1,5 +1,5 @@
 //
-//  Unit.swift
+//  GridUnit.swift
 //  grid-ios
 //
 //  Created by Brian Osborn on 8/3/22.
@@ -8,9 +8,9 @@
 import Foundation
 
 /**
- * Unit
+ * GridUnit
  */
-public enum Unit: Int {
+public enum GridUnit: Int {
     
     /**
      * Degrees

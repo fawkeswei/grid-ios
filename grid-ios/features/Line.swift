@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import sf_ios
+import SimpleFeatures
 
 /**
  * Line between two points
@@ -40,7 +40,7 @@ open class Line: SFLine {
     /**
      * The unit
      */
-    public var unit: Unit {
+    public var unit: GridUnit {
         get {
             return point1.unit
         }
@@ -55,7 +55,7 @@ open class Line: SFLine {
      *            second point
      */
     public init(_ point1: GridPoint, _ point2: GridPoint) {
-        super.init(type:SF_LINESTRING, andHasZ: false, andHasM: false)
+        super.init(type:.LINESTRING, andHasZ: false, andHasM: false)
         setPoints(point1, point2)
     }
     
@@ -66,7 +66,7 @@ open class Line: SFLine {
      *            line to copy
      */
     public init(_ line: Line) {
-        super.init(type:SF_LINESTRING, andHasZ: line.hasZ, andHasM: line.hasM)
+        super.init(type:.LINESTRING, andHasZ: line.hasZ, andHasM: line.hasM)
         setPoints(line.point1, line.point2)
     }
     
@@ -93,7 +93,7 @@ open class Line: SFLine {
      *            unit
      * @return true if in the unit
      */
-    public func isUnit(_ unit: Unit) -> Bool {
+    public func isUnit(_ unit: GridUnit) -> Bool {
         return point1.isUnit(unit)
     }
     
@@ -122,7 +122,7 @@ open class Line: SFLine {
      *            unit
      * @return line in units, same line if equal units
      */
-    public func toUnit(_ unit: Unit) -> Line {
+    public func toUnit(_ unit: GridUnit) -> Line {
         var line: Line
         if isUnit(unit) {
             line = self
@@ -139,7 +139,7 @@ open class Line: SFLine {
      * @return line in degrees, same line if already in degrees
      */
     public func toDegrees() -> Line {
-        return toUnit(Unit.DEGREE)
+        return toUnit(GridUnit.DEGREE)
     }
     
     /**
@@ -148,7 +148,7 @@ open class Line: SFLine {
      * @return line in meters, same line if already in meters
      */
     public func toMeters() -> Line {
-        return toUnit(Unit.METER)
+        return toUnit(GridUnit.METER)
     }
     
     /**
