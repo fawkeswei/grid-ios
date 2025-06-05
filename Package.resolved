@@ -1,0 +1,24 @@
+{
+  "originHash" : "47573f80a02afe13b0ccd0c845363afd1f6ed4bf4259249143f936dab76fd332",
+  "pins" : [
+    {
+      "identity" : "color-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ngageoint/color-ios",
+      "state" : {
+        "revision" : "1c588dafaf599a32d9adc29880264281dfbf286f",
+        "version" : "2.0.0"
+      }
+    },
+    {
+      "identity" : "simple-features-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ngageoint/simple-features-ios",
+      "state" : {
+        "revision" : "615127133c83122077dcf71daa53a9a93f05a347",
+        "version" : "5.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

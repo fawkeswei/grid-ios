@@ -6,7 +6,7 @@
 //
 
 import MapKit
-import sf_ios
+import SimpleFeatures
 
 /**
  * Tile Utils

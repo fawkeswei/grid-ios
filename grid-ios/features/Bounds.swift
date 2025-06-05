@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import sf_ios
+import SimpleFeatures
 
 /**
  * Grid Bounds
@@ -27,7 +27,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return bounds
      */
     public static func degrees(_ minLongitude: Double, _ minLatitude: Double, _ maxLongitude: Double, _ maxLatitude: Double) -> Bounds {
-        return Bounds(minLongitude, minLatitude, maxLongitude, maxLatitude, Unit.DEGREE)
+        return Bounds(minLongitude, minLatitude, maxLongitude, maxLatitude, GridUnit.DEGREE)
     }
     
     /**
@@ -44,13 +44,13 @@ public class Bounds: SFGeometryEnvelope {
      * @return bounds
      */
     public static func meters(_ minLongitude: Double, _ minLatitude: Double, _ maxLongitude: Double, _ maxLatitude: Double) -> Bounds {
-        return Bounds(minLongitude, minLatitude, maxLongitude, maxLatitude, Unit.METER)
+        return Bounds(minLongitude, minLatitude, maxLongitude, maxLatitude, GridUnit.METER)
     }
     
     /**
-     * Unit
+     * GridUnit
      */
-    public var unit: Unit
+    public var unit: GridUnit
     
     /**
      * The min longitude
@@ -231,7 +231,7 @@ public class Bounds: SFGeometryEnvelope {
      *            max latitude
      */
     public convenience init(_ minLongitude: Double, _ minLatitude: Double, _ maxLongitude: Double, _ maxLatitude: Double) {
-        self.init(minLongitude, minLatitude, maxLongitude, maxLatitude, Unit.DEGREE)
+        self.init(minLongitude, minLatitude, maxLongitude, maxLatitude, GridUnit.DEGREE)
     }
     
     /**
@@ -248,7 +248,7 @@ public class Bounds: SFGeometryEnvelope {
      * @param unit
      *            unit
      */
-    public init(_ minLongitude: Double, _ minLatitude: Double, _ maxLongitude: Double, _ maxLatitude: Double, _ unit: Unit) {
+    public init(_ minLongitude: Double, _ minLatitude: Double, _ maxLongitude: Double, _ maxLatitude: Double, _ unit: GridUnit) {
         self.unit = unit
         super.init(minX: NSDecimalNumber.init(value: minLongitude), andMinY: NSDecimalNumber.init(value: minLatitude), andMinZ: nil, andMinM: nil, andMaxX: NSDecimalNumber.init(value: maxLongitude), andMaxY: NSDecimalNumber.init(value: maxLatitude), andMaxZ: nil, andMaxM: nil)
     }
@@ -287,7 +287,7 @@ public class Bounds: SFGeometryEnvelope {
      * @param unit
      *            unit
      */
-    public init(_ envelope: SFGeometryEnvelope, _ unit: Unit) {
+    public init(_ envelope: SFGeometryEnvelope, _ unit: GridUnit) {
         self.unit = unit
         super.init(minX: envelope.minX, andMinY: envelope.minY, andMinZ: envelope.minZ, andMinM: envelope.minM, andMaxX: envelope.maxX, andMaxY: envelope.maxY, andMaxZ: envelope.maxZ, andMaxM: envelope.maxM)
     }
@@ -299,7 +299,7 @@ public class Bounds: SFGeometryEnvelope {
      *            unit
      * @return true if in the unit
      */
-    public func isUnit(_ unit: Unit) -> Bool {
+    public func isUnit(_ unit: GridUnit) -> Bool {
         return self.unit == unit
     }
     
@@ -309,7 +309,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return true if degrees
      */
     public func isDegrees() -> Bool {
-        return isUnit(Unit.DEGREE)
+        return isUnit(GridUnit.DEGREE)
     }
     
     /**
@@ -318,7 +318,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return true if meters
      */
     public func isMeters() -> Bool {
-        return isUnit(Unit.METER)
+        return isUnit(GridUnit.METER)
     }
     
     /**
@@ -328,7 +328,7 @@ public class Bounds: SFGeometryEnvelope {
      *            unit
      * @return bounds in units, same bounds if equal units
      */
-    public func toUnit(_ unit: Unit) -> Bounds {
+    public func toUnit(_ unit: GridUnit) -> Bounds {
         var bounds: Bounds
         if isUnit(unit) {
             bounds = self
@@ -346,7 +346,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return bounds in degrees, same bounds if already in degrees
      */
     public func toDegrees() -> Bounds {
-        return toUnit(Unit.DEGREE)
+        return toUnit(GridUnit.DEGREE)
     }
     
     /**
@@ -355,7 +355,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return bounds in meters, same bounds if already in meters
      */
     public func toMeters() -> Bounds {
-        return toUnit(Unit.METER)
+        return toUnit(GridUnit.METER)
     }
     
     /**
@@ -374,7 +374,7 @@ public class Bounds: SFGeometryEnvelope {
      */
     public func centroidLatitude() -> Double {
         var centerLatitude: Double
-        if unit == Unit.DEGREE {
+        if unit == GridUnit.DEGREE {
             centerLatitude = centroid().latitude
         } else {
             centerLatitude = midY()
@@ -384,7 +384,7 @@ public class Bounds: SFGeometryEnvelope {
     
     public override func centroid() -> GridPoint {
         var point: GridPoint
-        if unit == Unit.DEGREE {
+        if unit == GridUnit.DEGREE {
             point = toMeters().centroid().toDegrees()
         } else {
             point = GridPoint(super.centroid(), unit)
@@ -437,7 +437,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return west line
      */
     public func westLine() -> Line {
-        return grid_ios.Line(northwest, southwest)
+        return Line(northwest, southwest)
     }
 
     /**
@@ -446,7 +446,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return south line
      */
     public func southLine() -> Line {
-        return grid_ios.Line(southwest, southeast)
+        return Line(southwest, southeast)
     }
 
     /**
@@ -455,7 +455,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return east line
      */
     public func eastLine() -> Line {
-        return grid_ios.Line(southeast, northeast)
+        return Line(southeast, northeast)
     }
 
     /**
@@ -464,7 +464,7 @@ public class Bounds: SFGeometryEnvelope {
      * @return north line
      */
     public func northLine() -> Line {
-        return grid_ios.Line(northeast, northwest)
+        return Line(northeast, northwest)
     }
     
     /**
@@ -547,7 +547,7 @@ public class Bounds: SFGeometryEnvelope {
     }
     
     public required init?(coder: NSCoder) {
-        unit = Unit.init(rawValue: coder.decodeInteger(forKey: "unit"))!
+        unit = GridUnit.init(rawValue: coder.decodeInteger(forKey: "unit"))!
         super.init(coder: coder)
     }
     

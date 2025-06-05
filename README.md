@@ -29,42 +29,42 @@ View the latest [Appledoc](http://ngageoint.github.io/grid-ios/docs/api/)
 
 ```swift
 
-import grid_ios
+import Grid
 
 ```
 
 ### Build ###
 
-[![Build & Test](https://github.com/ngageoint/grid-ios/workflows/Build%20&%20Test/badge.svg)](https://github.com/ngageoint/grid-ios/actions/workflows/build-test.yml)
+[![Build](https://github.com/ngageoint/grid-ios/workflows/Build/badge.svg)](https://github.com/ngageoint/grid-ios/actions/workflows/build.yml)
 
-Build this repository using Xcode and/or CocoaPods:
+Build and Test (Uses UIKit, so we build with xcodebuild instead of SPM).
 
-    pod install
-
-Open grid-ios.xcworkspace in Xcode or build from command line:
-
-    xcodebuild -workspace 'grid-ios.xcworkspace' -scheme grid-ios build
-
-Run tests from Xcode or from command line:
-
-    xcodebuild test -workspace 'grid-ios.xcworkspace' -scheme grid-ios -destination 'platform=iOS Simulator,name=iPhone 15'
+    ./build.sh
+    
+You can build and test if you open the Package.swift in Xcode.
 
 ### Include Library ###
 
-Include this repository by specifying it in a Podfile using a supported option.
+Use this library via SPM in your Package.swift:
 
-Pull from [CocoaPods](https://cocoapods.org/pods/grid-ios):
+    dependencies: [
+        .package(url: "https://github.com/ngageoint/grid-ios.git", branch: "release/2.0.0"),
+    ]
+    
+Or as a tagged release:
 
-    pod 'grid-ios', '~> 1.0.7'
+    dependencies: [
+        .package(url: "https://github.com/ngageoint/grid-ios.git", from: "2.0.0"),
+    ]
 
-Pull from GitHub:
+Reference it in your Package.swift target:
 
-    pod 'grid-ios', :git => 'https://github.com/ngageoint/grid-ios.git', :branch => 'master'
-    pod 'grid-ios', :git => 'https://github.com/ngageoint/grid-ios.git', :tag => '1.0.7'
-
-Include as local project:
-
-    pod 'grid-ios', :path => '../grid-ios'
+    .target(
+        name: "MyApp",
+        dependencies: [
+            .product(name: "Grid", package: "grid-ios"),
+        ],
+    ),
 
 ### Remote Dependencies ###
 

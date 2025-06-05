@@ -113,7 +113,7 @@ public class GridTile {
      *            units
      * @return bounds in units
      */
-    public func bounds(_ unit: Unit) -> Bounds {
+    public func bounds(_ unit: GridUnit) -> Bounds {
         return bounds.toUnit(unit)
     }
     
@@ -123,7 +123,7 @@ public class GridTile {
      * @return bounds in degrees
      */
     public func boundsDegrees() -> Bounds {
-        return bounds(Unit.DEGREE)
+        return bounds(GridUnit.DEGREE)
     }
     
     /**
@@ -132,7 +132,7 @@ public class GridTile {
      * @return bounds in meters
      */
     public func boundsMeters() -> Bounds {
-        return bounds(Unit.METER)
+        return bounds(GridUnit.METER)
     }
     
     /**

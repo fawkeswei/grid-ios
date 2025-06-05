@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import sf_ios
+import SimpleFeatures
 
 /**
  * Grid utilities
@@ -155,7 +155,7 @@ public class GridUtils {
      *            desired unit
      * @return point in unit
      */
-    public static func toUnit(_ fromUnit: Unit, _ longitude: Double, _ latitude: Double, _ toUnit: Unit) -> GridPoint {
+    public static func toUnit(_ fromUnit: GridUnit, _ longitude: Double, _ latitude: Double, _ toUnit: GridUnit) -> GridPoint {
         var point: GridPoint
         if fromUnit == toUnit {
             point = GridPoint(longitude, latitude, toUnit)
@@ -178,7 +178,7 @@ public class GridUtils {
      * @return point in unit
      */
     public static func toUnit(_ longitude: Double, _ latitude: Double,
-                              _ unit: Unit) -> GridPoint {
+                              _ unit: GridUnit) -> GridPoint {
         var point: SFPoint
         switch unit {
         case .DEGREE:
@@ -267,7 +267,7 @@ public class GridUtils {
         let point: SFPoint? = SFGeometryUtils.intersectionBetweenLine1Point1(line1Point1.toMeters(), andLine1Point2: line1Point2.toMeters(), andLine2Point1: line2Point1.toMeters(), andLine2Point2: line2Point2.toMeters())
         
         if point != nil {
-            intersection = GridPoint(point!, Unit.METER).toUnit(line1Point1.unit)
+            intersection = GridPoint(point!, GridUnit.METER).toUnit(line1Point1.unit)
         }
         
         return intersection

@@ -4,9 +4,11 @@ Adheres to [Semantic Versioning](http://semver.org/).
 
 ---
 
-# 1.0.8 (TBD)
+# 2.0.0 (6-5-2025)
 
-* TBD
+* Updated to Swift Package Manager (SPM) and removed Cocoapods.
+* SimpleFeatures (sf-ios) 5.0.0 (Breaking change for NS_ENUM symbol exposure to Swift)
+* Updated `Unit` to `GridUnit` to prevent collision `Grid` class (GARS and MGRS could not resolve the symbol)
 
 ## [1.0.7](https://github.com/ngageoint/grid-ios/releases/tag/1.0.7) (04-08-2024)
 

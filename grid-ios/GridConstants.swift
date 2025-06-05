@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import sf_ios
+import SimpleFeatures
 
 /**
  * Grid Constants
