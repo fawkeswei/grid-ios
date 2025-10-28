@@ -136,6 +136,7 @@ public class TileUtils {
         return toGridPoint(toCoordinate(point))
     }
     
+    #if !os(watchOS)
     /**
      *  Get the current zoom level of the map view
      *
@@ -194,4 +195,5 @@ public class TileUtils {
         return region
     }
     
+    #endif
 }
