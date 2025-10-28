@@ -32,7 +32,8 @@ public class TileUtils {
      * High density scale
      */
     public static let SCALE_FACTOR_DEFAULT: Float = 2.0
-    
+
+    #if !os(watchOS)
     /**
      *  Get the tile side (width and height) dimension based upon the screen resolution
      *
@@ -41,6 +42,7 @@ public class TileUtils {
     public static func tileLength() -> Int {
         return tileLength(Float(UIScreen.main.nativeScale))
     }
+    #endif
 
     /**
      *  Get the tile side (width and height) dimension based upon the scale
